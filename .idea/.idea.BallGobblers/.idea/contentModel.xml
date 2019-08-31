@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\cygwin64\home\Dara\git\BallGobblers" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="BallGenerator.cs" t="Include" />
+        <e p="scripts" t="Include">
+          <e p="BallDestroy.cs" t="Include" />
+          <e p="BallMovement.cs" t="Include" />
+        </e>
+      </e>
+      <e p="BallGobblers.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\Dara\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Dara\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_BallGobblers.184169509.00" t="ExcludeRecursive" />
+  </component>
+</project>
