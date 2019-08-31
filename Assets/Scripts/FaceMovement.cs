@@ -6,6 +6,7 @@ public class FaceMovement : MonoBehaviour {
     public Sprite leftSprite;
     public Sprite middleSprite;
     public Sprite rightSprite;
+
     private SpriteRenderer _spriteRenderer;
 
     void Start() {
