@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FaceMovement : MonoBehaviour {
     public Sprite leftSprite;
@@ -20,6 +19,10 @@ public class FaceMovement : MonoBehaviour {
             _spriteRenderer.sprite = leftSprite;
         } else {
             _spriteRenderer.sprite = middleSprite;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SceneManager.LoadScene(0);
         }
     }
 }
