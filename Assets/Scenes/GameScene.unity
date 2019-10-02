@@ -228,7 +228,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0cc1b095944c90c48aaf04b94a20b7a1, type: 3}
   - {fileID: 21300000, guid: 081a64833a518814297369937f1f3415, type: 3}
   - {fileID: 21300000, guid: 817ba42338ff23b4f8c7d465ff13cebd, type: 3}
-  gobbleDuration: 0.5
+  gobbleDuration: 0.25
   idleDuration: 0.5
 --- !u!68 &249536763
 EdgeCollider2D:
@@ -777,7 +777,7 @@ MonoBehaviour:
   - {fileID: 4331943566429133777, guid: b4c7c7592317d854889045d6a6b8324f, type: 3}
   - {fileID: 6475149963695963286, guid: 46b047db83d509941bdb1c4e8fedde9b, type: 3}
   - {fileID: 1678166986736661191, guid: b7623a9fd20e5ce4281361b3453c5aec, type: 3}
-  waitTime: 0.75
+  waitTime: 0.5
   maxDelay: 2
 --- !u!4 &815928761
 Transform:
