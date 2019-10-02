@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4331943566429133777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5, z: -2.28}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.2246769}
+  m_LocalScale: {x: 25, y: 25, z: 0.2246769}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,6 +59,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -95,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
-  upThrust: 6.2
+  upThrust: 1200
   sideThrust: 0
 --- !u!50 &4331943566429133789
 Rigidbody2D:
@@ -112,9 +113,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 200
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0

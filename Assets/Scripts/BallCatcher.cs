@@ -17,6 +17,7 @@ public class BallCatcher : MonoBehaviour {
         if (IsBall(other) && IsFalling(other) && (CaughtLeft(other) || CaughtRight(other) || CaughtMiddle(other))) {
             Destroy(other.gameObject);
             score.text = (Int32.Parse(score.text) + 1).ToString();
+            _movementScript.Gobble(GetDirection(CaughtLeft(other), CaughtRight(other)));
         }
     }
 
@@ -29,15 +30,26 @@ public class BallCatcher : MonoBehaviour {
     }
 
     private bool CaughtLeft(Collider2D other) {
-        return _movementScript.leftSprite == _spriteRenderer.sprite && other.gameObject.transform.position.x < -2;
+        return _movementScript.openLeftSprite == _spriteRenderer.sprite && other.gameObject.transform.position.x < -2;
     }
 
     private bool CaughtRight(Collider2D other) {
-        return _movementScript.rightSprite == _spriteRenderer.sprite && other.gameObject.transform.position.x > 2;
+        return _movementScript.openRightSprite == _spriteRenderer.sprite && other.gameObject.transform.position.x > 2;
     }
 
     private bool CaughtMiddle(Collider2D other) {
         var xPosition = other.gameObject.transform.position.x;
-        return _movementScript.middleSprite == _spriteRenderer.sprite && xPosition < 1 && xPosition > -1;
+        return _movementScript.openMiddleSprite == _spriteRenderer.sprite && xPosition < 1 && xPosition > -1;
     }
+
+    private int GetDirection(bool left, bool right) {
+        if (left) {
+            return 0;
+        } else if (right) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
 }
