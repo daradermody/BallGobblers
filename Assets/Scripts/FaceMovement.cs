@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 public class FaceMovement : MonoBehaviour {
 
@@ -15,18 +16,24 @@ public class FaceMovement : MonoBehaviour {
     public Sprite closedMiddleSprite;
     public Sprite closedRightSprite;
 
-    public Sprite[] _idleSprites;
+    private Sprite[] _idleSprites;
 
     public float gobbleDuration;
+    public float gobbleShakeDuration;
+    public float gobbleShakeRadius;
+    public float gobbleShakeAngle;
+
     public float idleDuration;
 
     private SpriteRenderer _spriteRenderer;
     private float idleSpriteTimer;
     private bool isGobbling;
     private float gobbleSpriteTimer;
+    private bool shaking = false;
 
     void Start() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _idleSprites = new Sprite[3] { idleLeftSprite, idleMiddleSprite, idleRightSprite };
     }
 
     void Update() {
@@ -46,6 +53,7 @@ public class FaceMovement : MonoBehaviour {
     public void Gobble(int direction) {
         isGobbling = true;
         _spriteRenderer.sprite = GetGobbleSprite(direction);
+        shakeGameObject(_spriteRenderer.gameObject, gobbleShakeDuration);
     }
 
     private Sprite GetNextIdleSprite(Sprite currentSprite) {
@@ -91,5 +99,43 @@ public class FaceMovement : MonoBehaviour {
         }
 
         return _spriteRenderer.sprite;
+    }
+
+    IEnumerator shakeGameObjectCOR(GameObject objectToShake, float totalShakeDuration)
+    {
+        //Get Original Pos and rot
+        Transform objTransform = objectToShake.transform;
+        Vector3 defaultPos = objTransform.position;
+        Quaternion defaultRot = objTransform.rotation;
+
+        float counter = 0f;
+        //Do the actual shaking
+        while (counter < totalShakeDuration) {
+            counter += Time.deltaTime;
+
+            //Shake GameObject
+            Vector3 tempPos = defaultPos + UnityEngine.Random.insideUnitSphere * gobbleShakeRadius;
+            tempPos.z = defaultPos.z;
+            objTransform.position = tempPos;
+
+            //Only Rotate the Z axis if 2D
+            objTransform.rotation = defaultRot * Quaternion.AngleAxis(UnityEngine.Random.Range(-gobbleShakeAngle, gobbleShakeAngle), new Vector3(0f, 0f, 1f));
+            
+            yield return null;
+        }
+        objTransform.position = defaultPos; //Reset to original postion
+        objTransform.rotation = defaultRot;//Reset to original rotation
+
+        shaking = false;
+    }
+
+
+    void shakeGameObject(GameObject objectToShake, float shakeDuration)
+    {
+        if (shaking) {
+            return;
+        }
+        shaking = true;
+        StartCoroutine(shakeGameObjectCOR(objectToShake, shakeDuration));
     }
 }
