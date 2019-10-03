@@ -224,11 +224,10 @@ MonoBehaviour:
   closedLeftSprite: {fileID: 21300000, guid: 26a3b483644c1ca498a8082da7b9ec6f, type: 3}
   closedMiddleSprite: {fileID: 21300000, guid: d2cdd5e708d540d428f28ef92b891789, type: 3}
   closedRightSprite: {fileID: 21300000, guid: 32e79a62545e9384f9030fb5d4614fff, type: 3}
-  _idleSprites:
-  - {fileID: 21300000, guid: 0cc1b095944c90c48aaf04b94a20b7a1, type: 3}
-  - {fileID: 21300000, guid: 081a64833a518814297369937f1f3415, type: 3}
-  - {fileID: 21300000, guid: 817ba42338ff23b4f8c7d465ff13cebd, type: 3}
   gobbleDuration: 0.25
+  gobbleShakeDuration: 0.1
+  gobbleShakeRadius: 25
+  gobbleShakeAngle: 15
   idleDuration: 0.5
 --- !u!68 &249536763
 EdgeCollider2D:
