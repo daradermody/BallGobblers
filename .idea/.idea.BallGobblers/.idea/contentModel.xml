@@ -12,6 +12,7 @@
           <e p="FaceMovement.cs" t="Include" />
           <e p="MainMenu.cs" t="Include" />
           <e p="PauseMenu.cs" t="Include" />
+          <e p="Utils.cs" t="Include" />
         </e>
       </e>
       <e p="BallGobblers.sln" t="IncludeFlat" />

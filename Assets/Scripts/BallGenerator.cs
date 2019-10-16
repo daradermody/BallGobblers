@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Random = System.Random;
 
 public class BallGenerator : MonoBehaviour {
     public GameObject[] ballTypes;
@@ -11,10 +12,10 @@ public class BallGenerator : MonoBehaviour {
     }
 
     IEnumerator GenerateBalls() {
-        System.Random random = new System.Random();
+        Random random = new Random();
         yield return new WaitForSeconds(waitTime);
         for (;;) {
-            var ballToInstantiate = ballTypes[Random.Range(0, ballTypes.Length)];
+            var ballToInstantiate = ballTypes[UnityEngine.Random.Range(0, ballTypes.Length)];
             Instantiate(ballToInstantiate, this.gameObject.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(waitTime + random.Next(0, maxDelay));
         }

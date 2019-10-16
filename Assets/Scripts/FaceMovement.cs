@@ -1,108 +1,76 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FaceMovement : MonoBehaviour {
+    public Character[] characters;
 
-    public Sprite idleLeftSprite;
-    public Sprite idleMiddleSprite;
-    public Sprite idleRightSprite;
-    
-    public Sprite openLeftSprite;
-    public Sprite openMiddleSprite;
-    public Sprite openRightSprite;
-
-    public Sprite closedLeftSprite;
-    public Sprite closedMiddleSprite;
-    public Sprite closedRightSprite;
-
-    private Sprite[] _idleSprites;
-
-    public float gobbleDuration;
     public float gobbleShakeDuration;
     public float gobbleShakeRadius;
     public float gobbleShakeAngle;
-
     public float idleDuration;
 
+    [HideInInspector] public Character character;
     private SpriteRenderer _spriteRenderer;
-    private float idleSpriteTimer;
-    private bool isGobbling;
-    private float gobbleSpriteTimer;
-    private bool shaking = false;
+    private float _idleSpriteTimer;
+    private bool _isGobbling;
+    private readonly IEnumerator<int> _upAndDown = UpAndDownGenerator(3).GetEnumerator();
 
     void Start() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _idleSprites = new Sprite[3] { idleLeftSprite, idleMiddleSprite, idleRightSprite };
+        character = characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : 0];
     }
 
     void Update() {
-        if (isGobbling) {
-            gobbleSpriteTimer += Time.deltaTime;
-            if (gobbleSpriteTimer >= gobbleDuration)
-            {
-                gobbleSpriteTimer = 0f;
-                isGobbling = false;
-                _spriteRenderer.sprite = GetInputDirectionSprite();
-            }
-        } else {
+        if (!_isGobbling) {
             _spriteRenderer.sprite = GetInputDirectionSprite();
         }
     }
 
-    public void Gobble(int direction) {
-        isGobbling = true;
+    public void Gobble(Direction direction) {
+        _isGobbling = true;
         _spriteRenderer.sprite = GetGobbleSprite(direction);
-        shakeGameObject(_spriteRenderer.gameObject, gobbleShakeDuration);
+        StartCoroutine(ShakeGameObjectCor(_spriteRenderer.gameObject, gobbleShakeDuration));
     }
 
-    private Sprite GetNextIdleSprite(Sprite currentSprite) {
-        int currentIndex = Array.IndexOf(_idleSprites, currentSprite);
-        int nextIndex = currentIndex + 1;
-        if (nextIndex + 1 <= _idleSprites.Length) {
-            return _idleSprites[nextIndex];
-        } else {
-            Array.Reverse(_idleSprites, 0, _idleSprites.Length);
+    private Sprite GetGobbleSprite(Direction direction) {
+        if (direction == Direction.Left) {
+            return character.gobbleLeft;
         }
-        return _idleSprites[1];
-    }
 
-    private Sprite GetGobbleSprite(int direction) {
-        switch (direction) {
-            case 0:
-                return closedLeftSprite;
-            case 1:
-                return closedRightSprite;
-            case 2:
-                return closedMiddleSprite;
-            default:
-                Debug.Log("Invalid direction: " + direction);
-                return closedMiddleSprite;
+        if (direction == Direction.Middle) {
+            return character.gobbleMiddle;
         }
+
+        return character.gobbleRight;
     }
 
     private Sprite GetInputDirectionSprite() {
+        if (Input.GetAxis("Horizontal") < 0) {
+            return character.openLeft;
+        }
+
         if (Input.GetAxis("Horizontal") > 0) {
-            return openRightSprite;
+            return character.openRight;
         }
-        else if (Input.GetAxis("Horizontal") < 0) {
-            return openLeftSprite;
+
+        if (Input.GetAxis("Vertical") > 0) {
+            return character.openMiddle;
         }
-        else if ((Input.GetAxis("Vertical") > 0)) {
-            return openMiddleSprite;
-        }
-        
-        idleSpriteTimer += Time.deltaTime;
-        if (idleSpriteTimer >= idleDuration) {
-            idleSpriteTimer = 0f;
-            return GetNextIdleSprite(_spriteRenderer.sprite);
+
+        _idleSpriteTimer += Time.deltaTime;
+        if (_idleSpriteTimer >= idleDuration) {
+            _idleSpriteTimer = 0f;
+            _upAndDown.MoveNext();
+            return character.IdleSprites[_upAndDown.Current];
         }
 
         return _spriteRenderer.sprite;
     }
 
-    IEnumerator shakeGameObjectCOR(GameObject objectToShake, float totalShakeDuration)
-    {
+    IEnumerator ShakeGameObjectCor(GameObject objectToShake, float totalShakeDuration) {
         //Get Original Pos and rot
         Transform objTransform = objectToShake.transform;
         Vector3 defaultPos = objTransform.position;
@@ -114,28 +82,37 @@ public class FaceMovement : MonoBehaviour {
             counter += Time.deltaTime;
 
             //Shake GameObject
-            Vector3 tempPos = defaultPos + UnityEngine.Random.insideUnitSphere * gobbleShakeRadius;
+            Vector3 tempPos = defaultPos + Random.insideUnitSphere * gobbleShakeRadius;
             tempPos.z = defaultPos.z;
             objTransform.position = tempPos;
 
             //Only Rotate the Z axis if 2D
-            objTransform.rotation = defaultRot * Quaternion.AngleAxis(UnityEngine.Random.Range(-gobbleShakeAngle, gobbleShakeAngle), new Vector3(0f, 0f, 1f));
-            
+            objTransform.rotation = defaultRot *
+                                    Quaternion.AngleAxis(Random.Range(-gobbleShakeAngle, gobbleShakeAngle),
+                                        new Vector3(0f, 0f, 1f));
+
             yield return null;
         }
-        objTransform.position = defaultPos; //Reset to original postion
-        objTransform.rotation = defaultRot;//Reset to original rotation
 
-        shaking = false;
+        objTransform.position = defaultPos; //Reset to original postion
+        objTransform.rotation = defaultRot; //Reset to original rotation
+
+        _isGobbling = false;
     }
 
+    private static IEnumerable<int> UpAndDownGenerator(int size) {
+        var index = 0;
+        var direction = 1;
 
-    void shakeGameObject(GameObject objectToShake, float shakeDuration)
-    {
-        if (shaking) {
-            return;
+        for (;;) {
+            if (index == size - 1) {
+                direction = -1;
+            } else if (index == 0) {
+                direction = 1;
+            }
+
+            index += direction;
+            yield return index;
         }
-        shaking = true;
-        StartCoroutine(shakeGameObjectCOR(objectToShake, shakeDuration));
     }
 }
