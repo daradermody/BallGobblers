@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum CharacterSelection { Michael, Dara };
+
 public class FaceMovement : MonoBehaviour {
+    public CharacterSelection defaultCharacter;
     public Character[] characters;
 
     public float gobbleShakeDuration;
@@ -20,7 +23,8 @@ public class FaceMovement : MonoBehaviour {
 
     void Start() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        character = characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : 0];
+        character = characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : (int) defaultCharacter];
+        _spriteRenderer.sprite = character.idleMiddle;
     }
 
     void Update() {
