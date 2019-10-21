@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93a489e7cd91aa4fb89647747852519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCharacter: 0
+  defaultCharacter: 1
   characters:
   - idleLeft: {fileID: 946327563001839494, guid: 2806573eafaaba9418dc59ac71016f86,
       type: 3}

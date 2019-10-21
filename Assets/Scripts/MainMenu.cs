@@ -2,8 +2,16 @@
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-    public void PlayGame() {
-        SceneManager.LoadScene("MainScene");
+    public GameObject mainMenuPage;
+    public GameObject characterSelectionPage;
+
+    public void Start() {
+        characterSelectionPage.SetActive(false);
+        mainMenuPage.SetActive(true);
+    }
+
+    public void PlayGame(int character) {
+        PlayerPrefs.SetInt("CharacterSelected", character);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

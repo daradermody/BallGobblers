@@ -149,9 +149,9 @@ TextureImporter:
       name: idle_middle
       rect:
         serializedVersion: 2
-        x: 3335
+        x: 3542
         y: 0
-        width: 3715
+        width: 3437
         height: 4100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -170,9 +170,9 @@ TextureImporter:
       name: idle_right
       rect:
         serializedVersion: 2
-        x: 6866
+        x: 6872
         y: 0
-        width: 3225
+        width: 3437
         height: 4100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

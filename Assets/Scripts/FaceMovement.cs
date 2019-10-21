@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Utils;
 using Random = UnityEngine.Random;
 
-public enum CharacterSelection { Michael, Dara };
+public enum CharacterChoices { Michael, Dara };
 
 public class FaceMovement : MonoBehaviour {
-    public CharacterSelection defaultCharacter;
+    public CharacterChoices defaultCharacter;
     public Character[] characters;
 
     public float gobbleShakeDuration;
@@ -102,21 +103,5 @@ public class FaceMovement : MonoBehaviour {
         objTransform.rotation = defaultRot; //Reset to original rotation
 
         _isGobbling = false;
-    }
-
-    private static IEnumerable<int> UpAndDownGenerator(int size) {
-        var index = 0;
-        var direction = 1;
-
-        for (;;) {
-            if (index == size - 1) {
-                direction = -1;
-            } else if (index == 0) {
-                direction = 1;
-            }
-
-            index += direction;
-            yield return index;
-        }
     }
 }

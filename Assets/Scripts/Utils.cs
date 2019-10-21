@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -17,3 +18,21 @@ public class Character {
 }
 
 public enum Direction { Left, Middle, Right }
+
+public static class Utils {
+    public static IEnumerable<int> UpAndDownGenerator(int size) {
+        var index = 0;
+        var direction = 1;
+
+        for (;;) {
+            if (index == size - 1) {
+                direction = -1;
+            } else if (index == 0) {
+                direction = 1;
+            }
+
+            index += direction;
+            yield return index;
+        }
+    }
+}
