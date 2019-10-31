@@ -1232,8 +1232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2d82bdd89789e4188471fdc92a7023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPage: {fileID: 0}
-  characterSelectionPage: {fileID: 0}
+  mainMenuPage: {fileID: 2046495650}
+  characterSelectionPage: {fileID: 1747378433}
 --- !u!114 &1379089763
 MonoBehaviour:
   m_ObjectHideFlags: 0
