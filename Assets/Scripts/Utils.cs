@@ -17,6 +17,18 @@ public class Character {
     public Sprite[] IdleSprites => new[] {idleLeft, idleMiddle, idleRight};
 }
 
+[Serializable]
+public class Body {
+    public Sprite idleLeft;
+    public Sprite idleMiddle;
+    public Sprite idleRight;
+    public Sprite openLeft;
+    public Sprite openMiddle;
+    public Sprite openRight;
+
+    public Sprite[] IdleSprites => new[] { idleLeft, idleMiddle, idleRight };
+}
+
 public enum Direction { Left, Middle, Right }
 
 public static class Utils {
