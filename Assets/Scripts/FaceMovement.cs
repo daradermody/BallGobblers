@@ -7,72 +7,30 @@ using Random = UnityEngine.Random;
 
 public enum CharacterChoices { Michael, Dara };
 
-public class FaceMovement : MonoBehaviour {
+public class FaceMovement : Movement {
     public CharacterChoices defaultCharacter;
     public Character[] characters;
-
-    public float gobbleShakeDuration;
-    public float gobbleShakeRadius;
-    public float gobbleShakeAngle;
-    public float idleDuration;
-
-    [HideInInspector] public Character character;
-    private SpriteRenderer _spriteRenderer;
-    private float _idleSpriteTimer;
-    private bool _isGobbling;
-    private readonly IEnumerator<int> _upAndDown = UpAndDownGenerator(3).GetEnumerator();
+    private Character characterSprites;
 
     void Start() {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        character = characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : (int) defaultCharacter];
-        _spriteRenderer.sprite = character.idleMiddle;
-    }
-
-    void Update() {
-        if (!_isGobbling) {
-            _spriteRenderer.sprite = GetInputDirectionSprite();
-        }
+        characterSprites = (Character) characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : (int) defaultCharacter];
+        SetSprites(characterSprites);
     }
 
     public void Gobble(Direction direction) {
-        _isGobbling = true;
-        _spriteRenderer.sprite = GetGobbleSprite(direction);
-        StartCoroutine(ShakeGameObjectCor(_spriteRenderer.gameObject, gobbleShakeDuration));
+        base.Gobble(GetGobbleSprite(direction), ShakeGameObjectCor(_spriteRenderer.gameObject, gobbleShakeDuration));
     }
 
     private Sprite GetGobbleSprite(Direction direction) {
         if (direction == Direction.Left) {
-            return character.gobbleLeft;
+            return characterSprites.gobbleLeft;
         }
 
         if (direction == Direction.Middle) {
-            return character.gobbleMiddle;
+            return characterSprites.gobbleMiddle;
         }
 
-        return character.gobbleRight;
-    }
-
-    private Sprite GetInputDirectionSprite() {
-        if (Input.GetAxis("Horizontal") < 0) {
-            return character.openLeft;
-        }
-
-        if (Input.GetAxis("Horizontal") > 0) {
-            return character.openRight;
-        }
-
-        if (Input.GetAxis("Vertical") > 0) {
-            return character.openMiddle;
-        }
-
-        _idleSpriteTimer += Time.deltaTime;
-        if (_idleSpriteTimer >= idleDuration) {
-            _idleSpriteTimer = 0f;
-            _upAndDown.MoveNext();
-            return character.IdleSprites[_upAndDown.Current];
-        }
-
-        return _spriteRenderer.sprite;
+        return characterSprites.gobbleRight;
     }
 
     IEnumerator ShakeGameObjectCor(GameObject objectToShake, float totalShakeDuration) {
