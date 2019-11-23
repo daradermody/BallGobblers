@@ -201,7 +201,7 @@ Transform:
   m_LocalScale: {x: 29.860668, y: 29.051666, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &249536762
 MonoBehaviour:
@@ -215,6 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93a489e7cd91aa4fb89647747852519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gobbleShakeDuration: 0.1
+  gobbleShakeRadius: 25
+  gobbleShakeAngle: 15
+  idleDuration: 0.5
   defaultCharacter: 1
   characters:
   - idleLeft: {fileID: 946327563001839494, guid: 2806573eafaaba9418dc59ac71016f86,
@@ -223,17 +227,17 @@ MonoBehaviour:
       type: 3}
     idleRight: {fileID: -8472338556737090998, guid: 2806573eafaaba9418dc59ac71016f86,
       type: 3}
-    gobbleLeft: {fileID: 7504256608157028760, guid: 2806573eafaaba9418dc59ac71016f86,
-      type: 3}
-    gobbleMiddle: {fileID: 272568088329898103, guid: 2806573eafaaba9418dc59ac71016f86,
-      type: 3}
-    gobbleRight: {fileID: -8161485212160629917, guid: 2806573eafaaba9418dc59ac71016f86,
-      type: 3}
     openLeft: {fileID: -113052560935552864, guid: 2806573eafaaba9418dc59ac71016f86,
       type: 3}
     openMiddle: {fileID: 3411175669810863512, guid: 2806573eafaaba9418dc59ac71016f86,
       type: 3}
     openRight: {fileID: -192978378444664910, guid: 2806573eafaaba9418dc59ac71016f86,
+      type: 3}
+    gobbleLeft: {fileID: 7504256608157028760, guid: 2806573eafaaba9418dc59ac71016f86,
+      type: 3}
+    gobbleMiddle: {fileID: 272568088329898103, guid: 2806573eafaaba9418dc59ac71016f86,
+      type: 3}
+    gobbleRight: {fileID: -8161485212160629917, guid: 2806573eafaaba9418dc59ac71016f86,
       type: 3}
   - idleLeft: {fileID: -854020213049671364, guid: 8f044e263c74a409fbac018bc4160906,
       type: 3}
@@ -241,32 +245,18 @@ MonoBehaviour:
       type: 3}
     idleRight: {fileID: -7894900107736124702, guid: 8f044e263c74a409fbac018bc4160906,
       type: 3}
-    gobbleLeft: {fileID: 3942570004255216979, guid: 8f044e263c74a409fbac018bc4160906,
-      type: 3}
-    gobbleMiddle: {fileID: 1278410383492948367, guid: 8f044e263c74a409fbac018bc4160906,
-      type: 3}
-    gobbleRight: {fileID: -5901352959252594928, guid: 8f044e263c74a409fbac018bc4160906,
-      type: 3}
     openLeft: {fileID: 6267893422584479912, guid: 8f044e263c74a409fbac018bc4160906,
       type: 3}
     openMiddle: {fileID: 6752816983666655613, guid: 8f044e263c74a409fbac018bc4160906,
       type: 3}
     openRight: {fileID: -5991955626889245492, guid: 8f044e263c74a409fbac018bc4160906,
       type: 3}
-  gobbleShakeDuration: 0.1
-  gobbleShakeRadius: 25
-  gobbleShakeAngle: 15
-  idleDuration: 0.5
-  character:
-    idleLeft: {fileID: 0}
-    idleMiddle: {fileID: 0}
-    idleRight: {fileID: 0}
-    gobbleLeft: {fileID: 0}
-    gobbleMiddle: {fileID: 0}
-    gobbleRight: {fileID: 0}
-    openLeft: {fileID: 0}
-    openMiddle: {fileID: 0}
-    openRight: {fileID: 0}
+    gobbleLeft: {fileID: 3942570004255216979, guid: 8f044e263c74a409fbac018bc4160906,
+      type: 3}
+    gobbleMiddle: {fileID: 1278410383492948367, guid: 8f044e263c74a409fbac018bc4160906,
+      type: 3}
+    gobbleRight: {fileID: -5901352959252594928, guid: 8f044e263c74a409fbac018bc4160906,
+      type: 3}
 --- !u!68 &249536763
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -820,7 +810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &864403107
 GameObject:
@@ -902,7 +892,7 @@ Transform:
   m_LocalScale: {x: 30, y: 30, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &864403110
 MonoBehaviour:
@@ -916,7 +906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51290288c76925b4f8d485e3b21eeb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gobbleDuration: 0.1
+  gobbleShakeDuration: 0.1
+  gobbleShakeRadius: 25
+  gobbleShakeAngle: 15
   idleDuration: 0.5
   body:
     idleLeft: {fileID: -1880120661550918566, guid: ee5e802b4433e124f8137b95ccb9f409,
@@ -1310,7 +1302,7 @@ RectTransform:
   - {fileID: 1465671631}
   - {fileID: 1952797792}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1716,7 +1708,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776965032
 GameObject:
@@ -1894,7 +1886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1875833078
 GameObject:
