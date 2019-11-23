@@ -35,8 +35,6 @@ public class Movement : MonoBehaviour
     }
 
     private Sprite GetInputDirectionSprite() {
-        Debug.Log(Input.mousePosition.x + " : " + Screen.width);
-        Debug.Log(Input.mousePosition.x / Screen.width);
         if (Input.GetAxis("Horizontal") < 0 || Input.GetMouseButton(0) && (Input.mousePosition.x / Screen.width) < 0.33) {
             return sprites.openLeft;
         }
