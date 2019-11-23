@@ -35,16 +35,18 @@ public class Movement : MonoBehaviour
     }
 
     private Sprite GetInputDirectionSprite() {
-        if (Input.GetAxis("Horizontal") < 0) {
+        Debug.Log(Input.mousePosition.x + " : " + Screen.width);
+        Debug.Log(Input.mousePosition.x / Screen.width);
+        if (Input.GetAxis("Horizontal") < 0 || Input.GetMouseButton(0) && (Input.mousePosition.x / Screen.width) < 0.33) {
             return sprites.openLeft;
         }
 
-        if (Input.GetAxis("Horizontal") > 0) {
-            return sprites.openRight;
+        if (Input.GetAxis("Vertical") > 0 || Input.GetMouseButton(0) && (Input.mousePosition.x / Screen.width) < 0.66) {
+            return sprites.openMiddle;
         }
 
-        if (Input.GetAxis("Vertical") > 0) {
-            return sprites.openMiddle;
+        if (Input.GetAxis("Horizontal") > 0 || Input.GetMouseButton(0) && (Input.mousePosition.x / Screen.width) < 1) {
+            return sprites.openRight;
         }
 
         _idleSpriteTimer += Time.deltaTime;
