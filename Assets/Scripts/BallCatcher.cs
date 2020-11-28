@@ -30,16 +30,16 @@ public class BallCatcher : MonoBehaviour {
     }
 
     private bool CaughtLeft(Collider2D other) {
-        return _movementScript.character.openLeft == _spriteRenderer.sprite && other.gameObject.transform.position.x < -2;
+        return _movementScript.GetSprites().openLeft == _spriteRenderer.sprite && other.gameObject.transform.position.x < -2;
     }
 
     private bool CaughtRight(Collider2D other) {
-        return _movementScript.character.openRight == _spriteRenderer.sprite && other.gameObject.transform.position.x > 2;
+        return _movementScript.GetSprites().openRight == _spriteRenderer.sprite && other.gameObject.transform.position.x > 2;
     }
 
     private bool CaughtMiddle(Collider2D other) {
         var xPosition = other.gameObject.transform.position.x;
-        return _movementScript.character.openMiddle == _spriteRenderer.sprite && xPosition < 1 && xPosition > -1;
+        return _movementScript.GetSprites().openMiddle == _spriteRenderer.sprite && xPosition < 1 && xPosition > -1;
     }
 
     private Direction GetDirection(Collider2D other) {
