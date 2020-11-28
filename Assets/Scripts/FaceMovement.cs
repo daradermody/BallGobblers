@@ -23,7 +23,6 @@ public class FaceMovement : Movement {
 
     public void Gobble(Direction direction) {
         base.Gobble(GetGobbleSprite(direction), ShakeGameObjectCor(_spriteRenderer.gameObject, gobbleShakeDuration));
-        // play gobble audio
         _audioSource.PlayOneShot(GetRandomGulpClip(), 1.0F);
     }
 
