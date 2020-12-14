@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-using static Utils;
-using Random = UnityEngine.Random;
 
 public class BodyMovement : Movement {
 
@@ -29,8 +25,7 @@ public class BodyMovement : Movement {
         return body.openRight;
     }
     
-    IEnumerator WaitCor(float totalShakeDuration)
-    {
+    IEnumerator WaitCor(float totalShakeDuration) {
         float counter = 0f;
         while (counter < totalShakeDuration) {
             yield return null;
