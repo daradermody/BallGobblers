@@ -1,6 +1,4 @@
-﻿using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class BallCatcher : MonoBehaviour {
     public GameObject levelManager;
