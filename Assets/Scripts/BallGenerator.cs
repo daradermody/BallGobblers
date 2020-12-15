@@ -6,7 +6,7 @@ public class BallGenerator : MonoBehaviour {
     public GameObject ballHolder;
     public GameObject[] ballTypes;
     public float waitTime;
-    public int maxDelay;
+    public int maxDelay = 2;
 
     public void StartGeneration() {
         StartCoroutine("GenerateBalls");

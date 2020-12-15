@@ -26,10 +26,7 @@ public class BodyMovement : Movement {
     }
     
     IEnumerator WaitCor(float totalShakeDuration) {
-        float counter = 0f;
-        while (counter < totalShakeDuration) {
-            yield return null;
-        }
-        _isGobbling = false;
+        yield return new WaitForSeconds(totalShakeDuration);
+        isGobbling = false;
     }
 }

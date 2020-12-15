@@ -16,14 +16,14 @@ public class FaceMovement : Movement {
     public AudioClip[] gulpClips;
 
     void Start() {
-        characterSprites = (Character) characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : (int) defaultCharacter];
+        characterSprites = characters[PlayerPrefs.HasKey("CharacterSelected") ? PlayerPrefs.GetInt("CharacterSelected") : (int) defaultCharacter];
         SetSprites(characterSprites);
         _audioSource = GetComponent<AudioSource>();
     }
 
     public void Gobble(Direction direction) {
-        base.Gobble(GetGobbleSprite(direction), ShakeGameObjectCor(_spriteRenderer.gameObject, gobbleShakeDuration));
-        _audioSource.PlayOneShot(GetRandomGulpClip(), 1.0F);
+        base.Gobble(GetGobbleSprite(direction), ShakeGameObjectCor(spriteRenderer.gameObject, gobbleShakeDuration));
+        _audioSource.PlayOneShot(GetRandomGulpClip(), 0.25F);
     }
 
     private Sprite GetGobbleSprite(Direction direction) {
@@ -65,7 +65,7 @@ public class FaceMovement : Movement {
         objTransform.position = defaultPos; //Reset to original postion
         objTransform.rotation = defaultRot; //Reset to original rotation
 
-        _isGobbling = false;
+        isGobbling = false;
     }
 
     private AudioClip GetRandomGulpClip() {

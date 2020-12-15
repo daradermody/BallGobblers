@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
@@ -12,8 +13,16 @@ public class LevelManager : MonoBehaviour {
 
     private int _score;
     private int _level = 1;
+    private readonly Dictionary<int, float> levelToBallInterval = new Dictionary<int, float> {
+        {1, 1.5f},
+        {2, 1f},
+        {3, 0.5f},
+        {4, 0.25f},
+        {5, 0.1f}
+    };
 
     void Start() {
+
         gameplayUi.SetActive(false);
         levelDeclarationUi.GetComponent<LevelDeclaration>().DeclareLevel(_level);
         StartCoroutine("StartBallGeneration", 2f);
@@ -22,6 +31,8 @@ public class LevelManager : MonoBehaviour {
     IEnumerator StartBallGeneration(float delay) {
         yield return new WaitForSeconds(delay);
         gameplayUi.SetActive(true);
+        levelToBallInterval.TryGetValue(_level, out var baseBallInterval);
+        ballGenerator.GetComponent<BallGenerator>().waitTime = baseBallInterval == 0 ? 0.1f : baseBallInterval;
         ballGenerator.GetComponent<BallGenerator>().StartGeneration();
     }
 
@@ -40,7 +51,8 @@ public class LevelManager : MonoBehaviour {
         _score += 1;
         scoreAndLives.GetComponent<ScoreAndLives>().UpdateScore(_score);
 
-        if (_score % 20 == 0) {
+        var ballsInLevel = _score < 20 ? 10 : 20;
+        if (_score % ballsInLevel == 0) {
             IncrementLevel();
         }
     }

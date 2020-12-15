@@ -24,11 +24,9 @@
           <e p="Utils.cs" t="Include" />
         </e>
       </e>
-      <e p="ball_gobblers_demo.gif" t="Include" />
       <e p="BallGobblers.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="README.md" t="Include" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
     <e p="C:\Users\Dara\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
