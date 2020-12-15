@@ -1,9 +1,9 @@
-﻿using System;
+﻿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BallCatcher : MonoBehaviour {
-    public Text score;
+    public GameObject levelManager;
 
     private SpriteRenderer _spriteRenderer;
     private FaceMovement _movementScript;
@@ -14,10 +14,14 @@ public class BallCatcher : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (IsBall(other) && IsFalling(other) && (CaughtLeft(other) || CaughtRight(other) || CaughtMiddle(other))) {
-            Destroy(other.gameObject);
-            score.text = (Int32.Parse(score.text) + 1).ToString();
-            _movementScript.Gobble(GetDirection(other));
+        if (IsBall(other) && IsFalling(other)) {
+            if (CaughtLeft(other) || CaughtRight(other) || CaughtMiddle(other)) {
+                Destroy(other.gameObject);
+                levelManager.GetComponent<LevelManager>().OnBallGobbled();
+                _movementScript.Gobble(GetDirection(other));
+            } else {
+                levelManager.GetComponent<LevelManager>().OnBallMissed();
+            }
         }
     }
 

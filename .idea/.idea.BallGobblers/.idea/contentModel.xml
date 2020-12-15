@@ -10,17 +10,25 @@
           <e p="BallGenerator.cs" t="Include" />
           <e p="BallMovement.cs" t="Include" />
           <e p="BodyMovement.cs" t="Include" />
+          <e p="CameraManager.cs" t="Include" />
           <e p="FaceMovement.cs" t="Include" />
+          <e p="GameResultsMenu.cs" t="Include" />
+          <e p="LevelDeclaration.cs" t="Include" />
+          <e p="LevelLabel.cs" t="Include" />
+          <e p="LevelManager.cs" t="Include" />
           <e p="MainMenu.cs" t="Include" />
           <e p="Movement.cs" t="Include" />
           <e p="PauseMenu.cs" t="Include" />
+          <e p="ScoreAndLives.cs" t="Include" />
           <e p="SpriteAnimation.cs" t="Include" />
           <e p="Utils.cs" t="Include" />
         </e>
       </e>
+      <e p="ball_gobblers_demo.gif" t="Include" />
       <e p="BallGobblers.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
+      <e p="README.md" t="Include" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
     <e p="C:\Users\Dara\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
