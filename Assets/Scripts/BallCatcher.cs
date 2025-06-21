@@ -28,7 +28,7 @@ public class BallCatcher : MonoBehaviour {
     }
 
     private static bool IsFalling(Collider2D other) {
-        return other.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0;
+        return other.gameObject.GetComponent<Rigidbody2D>().linearVelocity.y < 0;
     }
 
     private bool CaughtLeft(Collider2D other) {
